@@ -1,0 +1,58 @@
+{
+    " kneaddata_db_type = 'human_genome' -stub ": {
+        "content": [
+            {
+                "0": [
+                    [
+
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,0646f91b50d4594b42968bc1361c6f1d"
+                ],
+                "kneaddata_db": [
+                    [
+
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0646f91b50d4594b42968bc1361c6f1d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-15T14:25:25.547036029"
+    },
+    " kneaddata_db_type = 'human_genome' ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "hg37dec_v0.1.1.bt2:md5,636ec15bd69cf363a75a83dae3fbf66b",
+                        "hg37dec_v0.1.2.bt2:md5,2f009fbad865cd9da2e2eeb2b3701182",
+                        "hg37dec_v0.1.3.bt2:md5,3baf94ccc14c58ee472e4407e8aad3f3",
+                        "hg37dec_v0.1.4.bt2:md5,a1529f662691440b0e22a5b49094da4a",
+                        "hg37dec_v0.1.rev.1.bt2:md5,905ab37c51076cb8872baf21eb9745a7",
+                        "hg37dec_v0.1.rev.2.bt2:md5,bdcb175eb208d542df91ec123ee80e9a"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,0646f91b50d4594b42968bc1361c6f1d"
+                ],
+                "kneaddata_db": [
+                    [
+                        "hg37dec_v0.1.1.bt2:md5,636ec15bd69cf363a75a83dae3fbf66b",
+                        "hg37dec_v0.1.2.bt2:md5,2f009fbad865cd9da2e2eeb2b3701182",
+                        "hg37dec_v0.1.3.bt2:md5,3baf94ccc14c58ee472e4407e8aad3f3",
+                        "hg37dec_v0.1.4.bt2:md5,a1529f662691440b0e22a5b49094da4a",
+                        "hg37dec_v0.1.rev.1.bt2:md5,905ab37c51076cb8872baf21eb9745a7",
+                        "hg37dec_v0.1.rev.2.bt2:md5,bdcb175eb208d542df91ec123ee80e9a"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0646f91b50d4594b42968bc1361c6f1d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-15T14:21:27.341432988"
+    }
+}

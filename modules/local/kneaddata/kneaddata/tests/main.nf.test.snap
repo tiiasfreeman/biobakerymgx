@@ -1,0 +1,104 @@
+{
+    "homo_sapiens - illumina - paired_end_fastq_gz": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_kneaddata_paired_1.fastq.gz:md5,acba94fdc94d1e4229beec12086a93af",
+                            "test_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_kneaddata.log:md5,607e779bd2cad8ef0b92daf20a0e3df1"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0dfc969a58fd168cbcd4a9ee87f0c28d"
+                ],
+                "kneaddata_log": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_kneaddata.log:md5,607e779bd2cad8ef0b92daf20a0e3df1"
+                    ]
+                ],
+                "preprocessed_reads": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_kneaddata_paired_1.fastq.gz:md5,acba94fdc94d1e4229beec12086a93af",
+                            "test_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0dfc969a58fd168cbcd4a9ee87f0c28d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-19T14:33:19.058118947"
+    },
+    "homo_sapiens - illumina - paired_end_fastq_gz - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_kneaddata_paired_1.fastq.gz:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_kneaddata_paired_2.fastq.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_kneaddata.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0dfc969a58fd168cbcd4a9ee87f0c28d"
+                ],
+                "kneaddata_log": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_kneaddata.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "preprocessed_reads": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_kneaddata_paired_1.fastq.gz:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_kneaddata_paired_2.fastq.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0dfc969a58fd168cbcd4a9ee87f0c28d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-19T12:12:00.805222439"
+    }
+}

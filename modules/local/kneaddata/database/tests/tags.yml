@@ -1,0 +1,2 @@
+kneaddata/database:
+  - modules/local/kneaddata/database/**
