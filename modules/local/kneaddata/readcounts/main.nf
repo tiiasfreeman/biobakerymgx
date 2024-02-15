@@ -1,6 +1,6 @@
-process KNEADDATA_KNEADDATA {
+process KNEADDATA_READCOUNTS {
     tag "${meta.id}"
-    label 'process_high'
+    label 'process_low'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -8,13 +8,11 @@ process KNEADDATA_KNEADDATA {
         'biocontainers/kneaddata:0.12.0--pyhdfd78af_1' }"
 
     input:
-    tuple val(meta), path(fastq_gz)
-    path (kneaddata_db)
+    tuple val(meta), path(kneaddata_logs)
 
     output:
-    tuple val(meta), path("${prefix}_kneaddata_paired_{1,2}.fastq.gz")  , emit: preprocessed_reads
-    tuple val(meta), path("${prefix}_kneaddata.log")                    , emit: kneaddata_log
-    path "versions.yml"                                                 , emit: versions
+    path("${prefix}_kneaddata_read_counts.tsv") , emit: kneaddata_read_counts
+    path "versions.yml"                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -25,7 +23,7 @@ process KNEADDATA_KNEADDATA {
     """
     kneaddata_read_count_table \\
         --input ./ \\
-        --output ${prefix}_kneaddata_read_count.tsv \\
+        --output ${prefix}_kneaddata_read_counts.tsv \\
         $args
 
     cat <<-END_VERSIONS > versions.yml
@@ -38,7 +36,7 @@ process KNEADDATA_KNEADDATA {
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-    ${prefix}_kneaddata_read_count.tsv
+    touch ${prefix}_kneaddata_read_counts.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

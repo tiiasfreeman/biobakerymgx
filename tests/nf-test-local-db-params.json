@@ -1,0 +1,4 @@
+{
+    "kneaddata_db": "/mmfs1/gscratch/pedslabs_hoffman/resources/kneaddata_human_genome",
+    "metaphlan_db": "/mmfs1/gscratch/pedslabs_hoffman/resources/metaphlan_database"
+}

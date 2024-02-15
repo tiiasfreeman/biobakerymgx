@@ -1,0 +1,40 @@
+{
+    " ['assets']['kneaddata']['kneaddata_log'] ": {
+        "content": [
+            {
+                "0": [
+                    "all_samples_kneaddata_read_counts.tsv:md5,a9372ca3ae084675b1914918138115c7"
+                ],
+                "1": [
+                    "versions.yml:md5,d6bd8ea7fac7f2a2574411e28de205e7"
+                ],
+                "kneaddata_read_counts": [
+                    "all_samples_kneaddata_read_counts.tsv:md5,a9372ca3ae084675b1914918138115c7"
+                ],
+                "versions": [
+                    "versions.yml:md5,d6bd8ea7fac7f2a2574411e28de205e7"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T15:49:15.314632252"
+    },
+    " ['assets']['kneaddata']['kneaddata_log'] - stub ": {
+        "content": [
+            {
+                "0": [
+                    "all_samples_kneaddata_read_counts.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    "versions.yml:md5,d6bd8ea7fac7f2a2574411e28de205e7"
+                ],
+                "kneaddata_read_counts": [
+                    "all_samples_kneaddata_read_counts.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "versions": [
+                    "versions.yml:md5,d6bd8ea7fac7f2a2574411e28de205e7"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T15:49:23.167052628"
+    }
+}

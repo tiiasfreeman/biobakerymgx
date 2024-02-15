@@ -1,0 +1,2 @@
+biobakerymgx_default:
+  - workflows/biobakerymgx/**

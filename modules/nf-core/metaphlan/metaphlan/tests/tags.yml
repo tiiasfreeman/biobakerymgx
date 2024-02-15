@@ -1,0 +1,2 @@
+metaphlan/metaphlan:
+  - modules/local/metaphlan/metaphlan/**

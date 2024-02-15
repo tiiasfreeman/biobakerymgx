@@ -1,0 +1,2 @@
+metaphlan/mergemetaphlantables:
+  - modules/local/metaphlan/mergemetaphlantables/**

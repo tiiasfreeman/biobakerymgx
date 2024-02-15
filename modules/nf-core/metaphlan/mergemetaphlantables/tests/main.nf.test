@@ -1,0 +1,72 @@
+nextflow_process {
+
+    name "Test Process: METAPHLAN_MERGEMETAPHLANTABLES"
+    script "../main.nf"
+    process "METAPHLAN_MERGEMETAPHLANTABLES"
+
+    tag "modules"
+    tag "modules_local"
+    tag "metaphlan"
+    tag "metaphlan/mergemetaphlantables"
+
+
+    test(" ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true)
+                    ],
+                    [
+                        [ id: 'test2' ],
+                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile2_txt'], checkifExists: true)
+                    ]
+                )
+                .map { [ [ id:'all_samples' ], it[1] ] }
+                .groupTuple( sort: 'deep' )
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test(" ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] -stub ") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true)
+                    ],
+                    [
+                        [ id: 'test2' ],
+                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile2_txt'], checkifExists: true)
+                    ]
+                )
+                .map { [ [ id:'all_samples' ], it[1] ] }
+                .groupTuple( sort: 'deep' )
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

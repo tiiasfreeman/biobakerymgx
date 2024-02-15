@@ -7,4 +7,6 @@ testing/
 testing*
 *.pyc
 .nf-tests/
+.nf-test/
 .nf-test.log
+nf-test-checklist.tsv

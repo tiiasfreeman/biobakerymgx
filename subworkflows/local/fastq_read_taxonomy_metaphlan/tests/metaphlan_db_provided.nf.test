@@ -1,0 +1,82 @@
+nextflow_workflow {
+
+    name "Test Subworkflow: FASTQ_READ_TAXONOMY_METAPHLAN"
+    script "../main.nf"
+    workflow "FASTQ_READ_TAXONOMY_METAPHLAN"
+
+    tag "subworkflows"
+    tag "subworkflows_local"
+    tag "fastq_read_taxonomy_metaphlan"
+    tag "fastq_read_taxonomy_metaphlan_db_provided"
+
+
+    test(" metaphlan_db = !null & ['sarscov2']['illumina']['test_fastq_gz'] ") {
+
+        when {
+            params {
+                load("$baseDir/tests/nf-test-local-db-params.json")
+                outdir          = "$outputDir"
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test1' ],
+                        [
+                            file(params.test_data['sarscov2']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+                            file(params.test_data['sarscov2']['illumina']['test_2_fastq_gz'], checkIfExists: true)
+                        ]
+                    ]
+                )
+                input[1] = "https://github.com/biobakery/MetaPhlAn/raw/master/metaphlan/utils/mpa_vOct22_CHOCOPhlAnSGB_202212_SGB2GTDB.tsv"
+                input[2] = Channel.of(
+                    params.metaphlan_db
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test(" metaphlan_db = !null & ['sarscov2']['illumina']['test_fastq_gz'] - stub") {
+
+        options "-stub"
+
+        when {
+            params {
+                load("$baseDir/tests/nf-test-local-db-params.json")
+                outdir          = "$outputDir"
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test1' ],
+                        [
+                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
+                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists: true)
+                        ]
+                    ]
+                )
+                input[1] = "https://github.com/biobakery/MetaPhlAn/raw/master/metaphlan/utils/mpa_vOct22_CHOCOPhlAnSGB_202212_SGB2GTDB.tsv"
+                input[2] = Channel.of(
+                    params.metaphlan_db
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

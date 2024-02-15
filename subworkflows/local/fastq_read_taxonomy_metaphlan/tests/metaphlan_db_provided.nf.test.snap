@@ -1,0 +1,68 @@
+{
+    " metaphlan_db = !null & ['sarscov2']['illumina']['test_fastq_gz'] ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,d70905cc040742d5e72b3a037888ee00"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,932a88b79ff4ac88dea7e3ea0b85af9b",
+                    "versions.yml:md5,96c5194c76c69ebe464df7904e44de26",
+                    "versions.yml:md5,ea68a854ad5e92799f15dbcf59f3795f"
+                ],
+                "metaphlan_profiles_merged_tsv": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,d70905cc040742d5e72b3a037888ee00"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,932a88b79ff4ac88dea7e3ea0b85af9b",
+                    "versions.yml:md5,96c5194c76c69ebe464df7904e44de26",
+                    "versions.yml:md5,ea68a854ad5e92799f15dbcf59f3795f"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T10:13:44.282677237"
+    },
+    " metaphlan_db = !null & ['sarscov2']['illumina']['test_fastq_gz'] - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,932a88b79ff4ac88dea7e3ea0b85af9b",
+                    "versions.yml:md5,96c5194c76c69ebe464df7904e44de26",
+                    "versions.yml:md5,ea68a854ad5e92799f15dbcf59f3795f"
+                ],
+                "metaphlan_profiles_merged_tsv": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,932a88b79ff4ac88dea7e3ea0b85af9b",
+                    "versions.yml:md5,96c5194c76c69ebe464df7904e44de26",
+                    "versions.yml:md5,ea68a854ad5e92799f15dbcf59f3795f"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T10:14:16.478201535"
+    }
+}

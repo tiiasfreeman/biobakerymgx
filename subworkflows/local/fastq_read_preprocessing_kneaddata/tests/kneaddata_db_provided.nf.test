@@ -1,0 +1,82 @@
+nextflow_workflow {
+
+    name "Test Subworkflow: FASTQ_READ_PREPROCESSING_KNEADDATA"
+    script "../main.nf"
+    workflow "FASTQ_READ_PREPROCESSING_KNEADDATA"
+
+    tag "subworkflows"
+    tag "subworkflows_local"
+    tag "fastq_read_preprocessing_kneaddata"
+    tag "fastq_read_preprocessing_kneaddata_db_provided"
+
+
+    test(" kneaddata_db = !null & ['sarscov2']['illumina']['test_fastq_gz'] ") {
+
+        when {
+            params {
+                load("$baseDir/tests/nf-test-local-db-params.json")
+                outdir          = "$outputDir"
+                max_cpus = 1
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        [
+                            file(params.test_data['sarscov2']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+                            file(params.test_data['sarscov2']['illumina']['test_2_fastq_gz'], checkIfExists: true)
+                        ]
+                    ]
+                )
+                input[1] = Channel.of(
+                    params.kneaddata_db
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test(" kneaddata_db = !null & ['sarscov2']['illumina']['test_fastq_gz'] - stub ") {
+
+        options "-stub"
+
+        when {
+            params {
+                load("$baseDir/tests/nf-test-local-db-params.json")
+                outdir          = "$outputDir"
+                max_cpus        = 1
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        [
+                            file(params.test_data['sarscov2']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+                            file(params.test_data['sarscov2']['illumina']['test_2_fastq_gz'], checkIfExists: true)
+                        ]
+                    ]
+                )
+                input[1] = Channel.of(
+                    params.kneaddata_db
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

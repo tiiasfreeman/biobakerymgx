@@ -1,0 +1,60 @@
+{
+    " ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,f4627b6001fe6dbde372f0a648f574c2"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
+                ],
+                "txt": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,f4627b6001fe6dbde372f0a648f574c2"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-26T08:14:43.460606117"
+    },
+    " ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] -stub ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
+                ],
+                "txt": [
+                    [
+                        {
+                            "id": "all_samples"
+                        },
+                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-26T08:14:56.286600733"
+    }
+}

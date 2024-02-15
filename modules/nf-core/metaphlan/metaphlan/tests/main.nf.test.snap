@@ -1,0 +1,87 @@
+{
+    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] -stub ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.biom:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bowtie2out.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,bacad48d9c19bb1f70311035d305d5ef"
+                ],
+                "biom": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.biom:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bt2out": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bowtie2out.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "profile": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,bacad48d9c19bb1f70311035d305d5ef"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-26T08:06:39.452200232"
+    },
+    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] ": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test_profile.txt:md5,c49c56a4adba879329e26b2791a8d3f8"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.bowtie2out.txt:md5,9bf563c43769e8300be64a8bf1a03c71"
+                ]
+            ],
+            [
+                "versions.yml:md5,bacad48d9c19bb1f70311035d305d5ef"
+            ]
+        ],
+        "timestamp": "2024-01-26T08:06:18.620102696"
+    }
+}

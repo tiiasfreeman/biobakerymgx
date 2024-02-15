@@ -1,0 +1,61 @@
+nextflow_process {
+
+    name "Test Process: METAPHLAN_SGBTOGTDBPROFILE"
+    script "../main.nf"
+    process "METAPHLAN_SGBTOGTDBPROFILE"
+
+    tag "modules"
+    tag "modules_local"
+    tag "metaphlan"
+    tag "metaphlan/sgbtogtdbprofile"
+
+    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true )
+                    ]
+                )
+                input[1] = file( params.test_data['assets']['metaphlan']['metaphlan_sgb2gtdb_tsv'], checkifExists: true )
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] -stub ") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true )
+                    ]
+                )
+                input[1] = file( params.test_data['assets']['metaphlan']['metaphlan_sgb2gtdb_tsv'], checkifExists: true )
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}

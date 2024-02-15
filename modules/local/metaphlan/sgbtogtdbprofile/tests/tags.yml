@@ -1,0 +1,2 @@
+metaphlan/sgbtogtdbprofile:
+  - modules/local/metaphlan/sgbtogtdbprofile/**

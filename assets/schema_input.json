@@ -13,7 +13,7 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "rep": {
+            "replicate": {
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Replicate number must be provided and cannot contain spaces",
@@ -47,6 +47,6 @@
                 ]
             }
         },
-        "required": ["sample", "replicate", "group", "fastq_1"]
+        "required": ["sample", "replicate", "group", "fastq_1", "fastq_2"]
     }
 }

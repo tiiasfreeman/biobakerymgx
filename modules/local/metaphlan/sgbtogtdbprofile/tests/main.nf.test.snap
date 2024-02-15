@@ -1,0 +1,118 @@
+{
+    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['local_modules']['metaphlan_sgb_profile_txt'] ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,5a3814d681d53102d64c5106285a11d1"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ],
+                "gtdb_profile": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,5a3814d681d53102d64c5106285a11d1"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T08:18:10.244049698"
+    },
+    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['local_modules']['metaphlan_sgb_profile_txt'] -stub ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ],
+                "gtdb_profile": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T08:18:23.490857699"
+    },
+    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] -stub ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ],
+                "gtdb_profile": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T14:34:59.136322339"
+    },
+    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,f0c993c440f0049ecd29d4925e730c39"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ],
+                "gtdb_profile": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gtdb_profile.txt:md5,f0c993c440f0049ecd29d4925e730c39"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,e838b899e50a9a2e3b8d83288a8acb9d"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-24T14:34:46.011418803"
+    }
+}

@@ -1,0 +1,83 @@
+nextflow_process {
+
+    name "Test Process: METAPHLAN_METAPHLAN"
+    script "../main.nf"
+    process "METAPHLAN_METAPHLAN"
+
+    tag "modules"
+    tag "modules_local"
+    tag "metaphlan"
+    tag "metaphlan/makedb"
+    tag "metaphlan/metaphlan"
+
+    setup {
+        run("METAPHLAN_MAKEDB") {
+            script "../../makedb/main.nf"
+            params {
+                metaphlan_db_version = "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103"
+            }
+        }
+    }
+
+
+    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] ") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        [
+                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
+                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists: true)
+                        ]
+                    ]
+                )
+                input[1] = METAPHLAN_MAKEDB.out.db
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert process.success },
+                { assert snapshot(
+                    process.out.profile,
+                    process.out.bt2out,
+                    process.out.versions
+                ).match() },
+                { assert process.out.biom != null }
+            )
+        }
+    }
+
+    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] -stub ") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test' ],
+                        [
+                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
+                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists: true)
+                        ]
+                    ]
+                )
+                input[1] = METAPHLAN_MAKEDB.out.db
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+}
