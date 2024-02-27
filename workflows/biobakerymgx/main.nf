@@ -25,16 +25,16 @@ include { paramsSummaryMap       } from 'plugin/nf-validation'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+include { FASTQC                 } from '../../modules/nf-core/fastqc/main'
 include { CAT_FASTQ              } from '../../modules/nf-core/cat/fastq/main'
-include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { MULTIQC                } from '../../modules/nf-core/multiqc/main'
 
 //
 // SUBWORKFLOWS: Installed directory from nf-core/subworkflows
 //
-include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_biobakerymgx_pipeline'
+include { paramsSummaryMultiqc   } from '../../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML } from '../../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText } from '../../subworkflows/local/utils_nfcore_biobakerymgx_pipeline'
 
 
 
@@ -44,9 +44,6 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_biob
     RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
-// Info required for completion email and summary
-def multiqc_report = []
 
 workflow BIOBAKERYMGX {
 
@@ -63,7 +60,7 @@ workflow BIOBAKERYMGX {
     -----------------------------------------------------------------------------------*/
     if ( !params.skip_runmerging ) {
 
-        ch_reads_for_cat_branch = fastq_gz
+        ch_reads_for_cat_branch = ch_samplesheet
             .map {
                 meta, reads ->
                     def meta_new = meta - meta.subMap('replicate')
@@ -91,7 +88,7 @@ workflow BIOBAKERYMGX {
         ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
 
     } else {
-        ch_reads_runmerged = fastq_gz
+        ch_reads_runmerged = ch_samplesheet
     }
 
     //
