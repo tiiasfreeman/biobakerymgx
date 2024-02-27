@@ -81,7 +81,7 @@ workflow BIOBAKERYMGX {
     /*-----------------------------------------------------------------------------------
         Read-preprocessing: KneadData
     -----------------------------------------------------------------------------------*/
-    if ( params.run_kneaddata ) {
+    if ( params.skip_kneaddata ) {
         // create channel from params.kneaddata_db
         if ( !params.kneaddata_db ){
             ch_kneaddata_db = null
@@ -104,7 +104,7 @@ workflow BIOBAKERYMGX {
     /*-----------------------------------------------------------------------------------
         Taxonomic classification: MetaPhlAn
     -----------------------------------------------------------------------------------*/
-    if ( params.run_metaphlan ) {
+    if ( !params.skip_metaphlan ) {
         // create channel from params.kneaddata_db
         if ( !params.metaphlan_db ){
             ch_metaphlan_db = null
@@ -129,8 +129,8 @@ workflow BIOBAKERYMGX {
 
     emit:
     preprocessed_fastq_gz           = ch_preprocessed_fastq_gz
-    ch_preprocessed_read_counts_tsv = ch_preprocessed_read_counts_tsv
-    cread_taxonomy_tsv              = ch_read_taxonomy_tsv
+    preprocessed_read_counts_tsv    = ch_preprocessed_read_counts_tsv
+    read_taxonomy_tsv               = ch_read_taxonomy_tsv
     versions                        = ch_versions
 }
 
