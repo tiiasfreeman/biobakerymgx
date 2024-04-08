@@ -1,0 +1,62 @@
+nextflow_process {
+
+    name "Test Process HUMANN_JOINTABLES"
+    script "/workspace/biobakerymgx/modules/nf-core/humann/humannjointables/humannjointables.nf"
+    process "HUMANN_JOINTABLES"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "humann"
+    tag "humann/humannjointables"
+    tag "genefamilies"
+    tag "pathcoverage"
+    tag "pathabundance"
+
+     setup {
+        run("HUMANN_DOWNLOADCHOCOPHLANDB") {
+            script "/workspace/biobakerymgx/modules/nf-core/humann/downloadchocophlandb/main.nf"
+        }
+
+        run("HUMANN_DOWNLOADUNIREFDB") {
+            script "/workspace/biobakerymgx/modules/nf-core/humann/downloadunirefdb/main.nf"
+        }
+
+        run("HUMANN_HUMANN") {
+            script "/workspace/biobakerymgx/modules/nf-core/humann/humann/main.nf"
+        }
+    }
+
+    test("bacteroides_fragilis - illumina - test1_contigs_fa_gz - stub") {
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test' ],
+                        file(HUMANN_HUMANN.out.genefamilies, checkIfExists: true)
+                    ])
+                input[1] = Channel.of(
+                    [
+                        [ id:'test' ],
+                        file(HUMANN_HUMANN.out.pathcoverage, checkIfExists: true)
+                    ])
+                input[2] = Channel.of(
+                    [
+                        [ id:'test' ],
+                        file(HUMANN_HUMANN.out.pathabundance, checkIfExists: true)
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match(),
+                    process.out.versions.match() }
+                { assert new File("${process.out.proviruses.get(0).get(1)}").exists() }
+
+            )
+        }
+    }
+}

@@ -1,0 +1,44 @@
+nextflow_process {
+
+    name "Test Process HUMANN_HUMANN"
+    script "/workspace/biobakerymgx/modules/nf-core/humann/humann/main.nf"
+    process "HUMANN_HUMANN"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "humann"
+    tag "humann/humann"
+
+    setup {
+        run("HUMANN_DOWNLOADCHOCOPHLANDB") {
+            script "/workspace/biobakerymgx/modules/nf-core/humann/downloadchocophlandb/main.nf"
+        }
+
+        run("HUMANN_DOWNLOADUNIREFDB") {
+            script "/workspace/biobakerymgx/modules/nf-core/humann/downloadunirefdb/main.nf"
+        }
+    }
+
+    test("bacteroides_fragilis - illumina - test1_contigs_fa_gz - stub") {
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test_fastq' ],
+                        file("https://github.com/biobakery/humann/raw/master/examples/demo.fastq.gz", checkIfExists: true)
+                    ])
+                input[1] = HUMANN_DOWNLOADCHOCOPHLANDB.out.chocophlan_db_dir
+                input[2] = HUMANN_DOWNLOADUNIREFDB.out.uniref_db_dir
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() },
+            )
+        }
+    }
+}

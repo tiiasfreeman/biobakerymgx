@@ -23,17 +23,17 @@
                     "metaphlan/makedb": {
                         "branch": "master",
                         "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
-                        "installed_by": ["modules"]
+                        "installed_by": ["fastq_taxonomic_profile_metaphlan", "modules"]
                     },
                     "metaphlan/mergemetaphlantables": {
                         "branch": "master",
                         "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
-                        "installed_by": ["modules"]
+                        "installed_by": ["fastq_taxonomic_profile_metaphlan", "modules"]
                     },
                     "metaphlan/metaphlan": {
                         "branch": "master",
                         "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
-                        "installed_by": ["modules"]
+                        "installed_by": ["fastq_taxonomic_profile_metaphlan", "modules"]
                     },
                     "multiqc": {
                         "branch": "master",
@@ -44,6 +44,11 @@
             },
             "subworkflows": {
                 "nf-core": {
+                    "fastq_taxonomic_profile_metaphlan": {
+                        "branch": "master",
+                        "git_sha": "4328ba3d1e81c66702dfcaafe812a56c436640f2",
+                        "installed_by": ["subworkflows"]
+                    },
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "cd08c91373cd00a73255081340e4914485846ba1",
