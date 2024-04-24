@@ -7,8 +7,8 @@
                         "id": "test"
                     },
                     [
-                        "test_kneaddata_paired_1.fastq.gz:md5,bc575548c0169cf3f12c38590060cbec",
-                        "test_kneaddata_paired_2.fastq.gz:md5,6dd6bd3bcb33e9dda68afa0c78a33b2d"
+                        "test_kneaddata_paired_1.fastq.gz:md5,acba94fdc94d1e4229beec12086a93af",
+                        "test_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
                     ]
                 ]
             ],
@@ -20,7 +20,7 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-04-24T10:06:32.04321443"
+        "timestamp": "2024-04-24T11:11:09.743832394"
     },
     "fastq.gz - stub": {
         "content": [
@@ -75,6 +75,6 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-04-24T10:06:43.652978972"
+        "timestamp": "2024-04-24T11:11:19.559542979"
     }
 }

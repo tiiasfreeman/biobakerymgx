@@ -1,0 +1,36 @@
+nextflow_pipeline {
+
+    name "Test pipeline: HOFFLAB_BIOBAKERYMGX"
+    script "main.nf"
+    tag "PIPELINE"
+
+    test("Parameters: default") {
+        when {
+            params {
+                input                   = "$projectDir/assets/samplesheet.csv"
+                outdir                  = "$outputDir"
+                perform_runmerging      = true
+                run_kneaddata           = true
+                kneaddata_db_version    = 'human_genome'
+                run_metaphlan           = true
+                metaphlan_db_version    = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path("${params.outdir}/RunMerging"),
+                    path("${params.outdir}/ReadPreprocessing"),
+                    path("${params.outdir}/ReadTaxonomy"),
+                    ).match() },
+                { assert new File("$outputDir/ReadQuality/fastqc/test1_1_fastqc.html").exists() },
+                { assert new File("$outputDir/ReadQuality/fastqc/test1_2_fastqc.html").exists() },
+                { assert new File("$outputDir/ReadQuality/fastqc/test2_1_fastqc.html").exists() },
+                { assert new File("$outputDir/ReadQuality/fastqc/test2_2_fastqc.html").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_report.html").exists() }
+            )
+        }
+    }
+}

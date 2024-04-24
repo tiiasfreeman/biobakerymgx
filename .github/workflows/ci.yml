@@ -9,7 +9,6 @@ on:
       - checks_requested
     branches:
       - master
-      - dev
 
 env:
   NXF_ANSI_LOG: false

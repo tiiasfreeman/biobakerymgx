@@ -7,7 +7,7 @@ nextflow_workflow {
     tag "biobakerymgx"
     tag "biobakerymgx_default"
 
-    test("") {
+    test("fastq.gz") {
         when {
             workflow {
                 """
