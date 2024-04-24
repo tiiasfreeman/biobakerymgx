@@ -62,7 +62,7 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-04-24T10:03:39.92337057"
+        "timestamp": "2024-04-24T14:49:25.110256152"
     },
     "fastq.gz + metaphlan_db": {
         "content": [
@@ -71,7 +71,7 @@
                     {
                         "id": "test"
                     },
-                    "test_profile.txt:md5,cd4748da44ffcd985244ffd6103f6a6d"
+                    "test_profile.txt:md5,33142bd652b3a5c4a7762f91515a802a"
                 ]
             ],
             [
@@ -90,6 +90,6 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-04-24T10:03:21.004630639"
+        "timestamp": "2024-04-24T14:48:47.602042185"
     }
 }
