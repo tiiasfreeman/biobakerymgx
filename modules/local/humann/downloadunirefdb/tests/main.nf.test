@@ -1,43 +1,46 @@
 nextflow_process {
 
-    name "Test Process: HUMANN_DOWNLOADUNIREFDB"
+    name "Test Process HUMANN_DOWNLOADUNIREFDB"
     script "../main.nf"
     process "HUMANN_DOWNLOADUNIREFDB"
+    config "./nextflow.config"
 
     tag "modules"
-    tag "modules_local"
+    tag "modules_nfcore"
     tag "humann"
-    tag "humann/downloadunirefdb"
+    tag "humann/downloadunireflandb"
 
-
-    test(" uniref_db_version = 'DEMO_diamond' ") {
-
+    test("DEMO_diamond") {
         when {
-            params {
-                uniref_db_version = 'DEMO_diamond'
+            process {
+                """
+                input[0] = "DEMO_diamond"
+                """
             }
         }
 
         then {
-            assertAll (
+            assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
             )
         }
     }
 
-    test(" uniref_db_version = 'DEMO_diamond' -stub ") {
+    test("DEMO_diamond - stub") {
 
         options "-stub"
 
         when {
-            params {
-                uniref_db_version = 'DEMO_diamond'
+            process {
+                """
+                input[0] = "DEMO_diamond"
+                """
             }
         }
 
         then {
-            assertAll (
+            assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
             )

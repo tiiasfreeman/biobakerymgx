@@ -117,7 +117,7 @@ workflow BIOBAKERYMGX {
         //
         // SUBWORKFLOW: KneadData
         //
-        ch_preprocessed_fastq_gz = FASTQ_READ_PREPROCESSING_KNEADDATA ( ch_reads_runmerged, ch_kneaddata_db ).preprocessed_fastq_gz
+        ch_preprocessed_fastq_gz = FASTQ_READ_PREPROCESSING_KNEADDATA ( ch_reads_runmerged, ch_kneaddata_db, params.kneaddata_db_version ).preprocessed_fastq_gz
         ch_preprocessed_read_counts_tsv = FASTQ_READ_PREPROCESSING_KNEADDATA.out.read_counts_tsv
         ch_versions = ch_versions.mix(FASTQ_READ_PREPROCESSING_KNEADDATA.out.versions)
     } else {
@@ -146,7 +146,7 @@ workflow BIOBAKERYMGX {
         //
         // SUBWORKFLOW: MetaPhlAn
         //
-        ch_read_taxonomy_tsv = FASTQ_READ_TAXONOMY_METAPHLAN ( ch_preprocessed_fastq_gz, ch_metaphlan_sgb2gtbd_file, ch_metaphlan_db ).metaphlan_profiles_merged_tsv
+        ch_read_taxonomy_tsv = FASTQ_READ_TAXONOMY_METAPHLAN ( ch_preprocessed_fastq_gz, ch_metaphlan_sgb2gtbd_file, ch_metaphlan_db, params.metaphlan_db_version ).metaphlan_profiles_merged_tsv
         ch_versions = ch_versions.mix(FASTQ_READ_TAXONOMY_METAPHLAN.out.versions)
     } else {
         ch_read_taxonomy_tsv = Channel.empty()

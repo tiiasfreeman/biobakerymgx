@@ -10,11 +10,13 @@ nextflow_process {
     tag "metaphlan/makedb"
 
 
-    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' ") {
+    test("'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'") {
 
         when {
-            params {
-                metaphlan_db_version = "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103"
+            process {
+                """
+                input[0] = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
+                """
             }
         }
 
@@ -26,13 +28,15 @@ nextflow_process {
         }
     }
 
-    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' -stub ") {
+    test("'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' -stub ") {
 
         options "-stub"
 
         when {
-            params {
-                metaphlan_db_version = "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103"
+            process {
+                """
+                input[0] = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
+                """
             }
         }
 

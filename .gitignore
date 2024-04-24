@@ -9,4 +9,4 @@ testing*
 .nf-tests/
 .nf-test/
 .nf-test.log
-nf-test-checklist.tsv
+parallel-nf-test*

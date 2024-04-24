@@ -9,8 +9,9 @@ include { KNEADDATA_READCOUNTS          } from '../../../modules/local/kneaddata
 workflow FASTQ_READ_PREPROCESSING_KNEADDATA {
 
     take:
-    raw_reads_fastq_gz  // channel: [ val(meta), [ reads_1.fastq.gz, reads_2.fastq.gz ] ] (MANDATORY)
-    kneaddata_db        // channel: [ kneaddata_db ] (OPTIONAL)
+    raw_reads_fastq_gz      // channel: [ val(meta), [ reads_1.fastq.gz, reads_2.fastq.gz ] ] (MANDATORY)
+    kneaddata_db            // channel: [ kneaddata_db ] (OPTIONAL)
+    kneaddata_db_version    // value: 'human_genome' (OPTIONAL)
 
     main:
 
@@ -23,7 +24,7 @@ workflow FASTQ_READ_PREPROCESSING_KNEADDATA {
         //
         // MODULE: Download KneadData database
         //
-        ch_kneaddata_db = KNEADDATA_DATABASE ().kneaddata_db
+        ch_kneaddata_db = KNEADDATA_DATABASE ( kneaddata_db_version ).kneaddata_db
         ch_versions = ch_versions.mix(KNEADDATA_DATABASE.out.versions)
     }
 

@@ -33,7 +33,7 @@ process KNEADDATA_KNEADDATA {
         --trimmomatic ${params.kneaddata_trimmomatic_path} \\
         $args
 
-    gzip ${prefix}_kneaddata_paired_*.fastq
+    gzip *.fastq
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

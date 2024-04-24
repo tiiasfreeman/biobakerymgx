@@ -68,6 +68,75 @@
         },
         "timestamp": "2024-02-15T11:13:45.851750436"
     },
+    " fasta.gz + 'human_genome' ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test2"
+                        },
+                        [
+                            "test2_kneaddata_paired_1.fastq.gz:md5,fa375e325db8088f41103e27be7b9fd7",
+                            "test2_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_kneaddata_paired_1.fastq.gz:md5,fa375e325db8088f41103e27be7b9fd7",
+                            "test_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "all_samples_kneaddata_read_counts.tsv:md5,0cbc1c285d40c25876ce0675fe36f34b"
+                ],
+                "2": [
+                    "versions.yml:md5,78fbce8ab53a0d6fb8dbf43cd7624846",
+                    "versions.yml:md5,78fbce8ab53a0d6fb8dbf43cd7624846",
+                    "versions.yml:md5,bb0ae5552fe7c380606c211bcf91f2c8",
+                    "versions.yml:md5,c97c9af1b0da5c6c85c297ad365653cc"
+                ],
+                "preprocessed_fastq_gz": [
+                    [
+                        {
+                            "id": "test2"
+                        },
+                        [
+                            "test2_kneaddata_paired_1.fastq.gz:md5,fa375e325db8088f41103e27be7b9fd7",
+                            "test2_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test_kneaddata_paired_1.fastq.gz:md5,fa375e325db8088f41103e27be7b9fd7",
+                            "test_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        ]
+                    ]
+                ],
+                "read_counts_tsv": [
+                    "all_samples_kneaddata_read_counts.tsv:md5,0cbc1c285d40c25876ce0675fe36f34b"
+                ],
+                "versions": [
+                    "versions.yml:md5,78fbce8ab53a0d6fb8dbf43cd7624846",
+                    "versions.yml:md5,78fbce8ab53a0d6fb8dbf43cd7624846",
+                    "versions.yml:md5,bb0ae5552fe7c380606c211bcf91f2c8",
+                    "versions.yml:md5,c97c9af1b0da5c6c85c297ad365653cc"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:32:19.654450168"
+    },
     " ['sarscov2']['illumina']['test_fastq_gz'] - stub ": {
         "content": [
             {

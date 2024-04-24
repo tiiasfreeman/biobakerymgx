@@ -7,7 +7,7 @@ nextflow_workflow {
     tag "biobakerymgx"
     tag "biobakerymgx_default"
 
-    test(" ['bacteroides_fragilis']['illumina']['test_fastq_gz'] ") {
+    test("") {
         when {
             workflow {
                 """
@@ -15,15 +15,15 @@ nextflow_workflow {
                     [
                         [ id:'test' ],
                         [
-                            file(params.test_data['assets']['fastqs']['test_1_fastq_gz'], checkIfExists: true),
-                            file(params.test_data['assets']['fastqs']['test_2_fastq_gz'], checkIfExists:true)
+                            file("$projectDir/assets/test-datasets/fastqs/SRX5235702_SRR8427717_1.fastq.gz", checkIfExists: true),
+                            file("$projectDir/assets/test-datasets/fastqs/SRX5235702_SRR8427717_2.fastq.gz", checkIfExists: true),
                         ]
                     ],
                     [
                         [ id:'test2' ],
                         [
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists:true)
+                            file("$projectDir/assets/test-datasets/fastqs/SRX5235702_SRR8427717_1.fastq.gz", checkIfExists: true),
+                            file("$projectDir/assets/test-datasets/fastqs/SRX5235702_SRR8427717_2.fastq.gz", checkIfExists: true),
                         ]
                     ]
                 )
@@ -31,45 +31,7 @@ nextflow_workflow {
             }
             params {
                 outdir                  = "$outputDir"
-                kneaddata_db_type       = 'human_genome'
-                metaphlan_db_version    = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
-                max_cpus                = 1
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-    }
-
-    test(" ['bacteroides_fragilis']['illumina']['test_fastq_gz'] - stub ") {
-        when {
-            workflow {
-                """
-                input[0] = Channel.of(
-                    [
-                        [ id:'test' ],
-                        [
-                            file(params.test_data['assets']['fastqs']['test_1_fastq_gz'], checkIfExists: true),
-                            file(params.test_data['assets']['fastqs']['test_2_fastq_gz'], checkIfExists:true)
-                        ]
-                    ],
-                    [
-                        [ id:'test2' ],
-                        [
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists:true)
-                        ]
-                    ]
-                )
-                """
-            }
-            params {
-                outdir                  = "$outputDir"
-                kneaddata_db_type       = 'human_genome'
+                kneaddata_db_version    = 'human_genome'
                 metaphlan_db_version    = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
                 max_cpus                = 1
             }

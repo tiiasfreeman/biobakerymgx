@@ -10,7 +10,7 @@ nextflow_process {
     tag "metaphlan/mergemetaphlantables"
 
 
-    test(" ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ") {
+    test(" metaphlan_sgb_profile ") {
 
         when {
             process {
@@ -18,11 +18,11 @@ nextflow_process {
                 input[0] = Channel.of(
                     [
                         [ id: 'test' ],
-                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true)
+                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile1.txt", checkifExists: true)
                     ],
                     [
                         [ id: 'test2' ],
-                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile2_txt'], checkifExists: true)
+                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile2.txt", checkifExists: true)
                     ]
                 )
                 .map { [ [ id:'all_samples' ], it[1] ] }
@@ -39,7 +39,7 @@ nextflow_process {
         }
     }
 
-    test(" ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] -stub ") {
+    test(" metaphlan_sgb_profile -stub ") {
 
         options "-stub"
 
@@ -49,11 +49,11 @@ nextflow_process {
                 input[0] = Channel.of(
                     [
                         [ id: 'test' ],
-                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true)
+                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile1.txt", checkifExists: true)
                     ],
                     [
                         [ id: 'test2' ],
-                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile2_txt'], checkifExists: true)
+                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile2.txt", checkifExists: true)
                     ]
                 )
                 .map { [ [ id:'all_samples' ], it[1] ] }

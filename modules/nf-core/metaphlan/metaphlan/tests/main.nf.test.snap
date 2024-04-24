@@ -1,5 +1,5 @@
 {
-    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] -stub ": {
+    "fastq.gz + metaphlan_db -stub ": {
         "content": [
             {
                 "0": [
@@ -27,7 +27,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,bacad48d9c19bb1f70311035d305d5ef"
+                    "versions.yml:md5,2a9ed777cd0065f872877f20553df297"
                 ],
                 "biom": [
                     [
@@ -54,20 +54,24 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,bacad48d9c19bb1f70311035d305d5ef"
+                    "versions.yml:md5,2a9ed777cd0065f872877f20553df297"
                 ]
             }
         ],
-        "timestamp": "2024-01-26T08:06:39.452200232"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:03:39.92337057"
     },
-    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] ": {
+    "fastq.gz + metaphlan_db": {
         "content": [
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test_profile.txt:md5,c49c56a4adba879329e26b2791a8d3f8"
+                    "test_profile.txt:md5,cd4748da44ffcd985244ffd6103f6a6d"
                 ]
             ],
             [
@@ -79,9 +83,13 @@
                 ]
             ],
             [
-                "versions.yml:md5,bacad48d9c19bb1f70311035d305d5ef"
+                "versions.yml:md5,2a9ed777cd0065f872877f20553df297"
             ]
         ],
-        "timestamp": "2024-01-26T08:06:18.620102696"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:03:21.004630639"
     }
 }

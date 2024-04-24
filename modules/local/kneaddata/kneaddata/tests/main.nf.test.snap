@@ -1,5 +1,5 @@
 {
-    "homo_sapiens - illumina - paired_end_fastq_gz": {
+    "fastq.gz": {
         "content": [
             [
                 [
@@ -7,8 +7,8 @@
                         "id": "test"
                     },
                     [
-                        "test_kneaddata_paired_1.fastq.gz:md5,acba94fdc94d1e4229beec12086a93af",
-                        "test_kneaddata_paired_2.fastq.gz:md5,7c8a08782ad6705eced33d11d5032859"
+                        "test_kneaddata_paired_1.fastq.gz:md5,bc575548c0169cf3f12c38590060cbec",
+                        "test_kneaddata_paired_2.fastq.gz:md5,6dd6bd3bcb33e9dda68afa0c78a33b2d"
                     ]
                 ]
             ],
@@ -16,9 +16,13 @@
                 "versions.yml:md5,0dfc969a58fd168cbcd4a9ee87f0c28d"
             ]
         ],
-        "timestamp": "2024-01-24T15:29:15.427615714"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:06:32.04321443"
     },
-    "homo_sapiens - illumina - paired_end_fastq_gz - stub": {
+    "fastq.gz - stub": {
         "content": [
             {
                 "0": [
@@ -67,6 +71,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-19T12:12:00.805222439"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:06:43.652978972"
     }
 }
