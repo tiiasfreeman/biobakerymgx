@@ -32,7 +32,42 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
         "timestamp": "2024-01-24T09:54:11.531938592"
+    },
+    "fastq.gz": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,4e157c9ddf7bbb9e0f8f8faff2fa6a17",
+                    "versions.yml:md5,4e157c9ddf7bbb9e0f8f8faff2fa6a17",
+                    "versions.yml:md5,88e7680fe2a8da33e35a81a07afff2c5",
+                    "versions.yml:md5,bb024cab3c497b202e7843d975eca0cf",
+                    "versions.yml:md5,bb024cab3c497b202e7843d975eca0cf"
+                ],
+                "metaphlan_profiles_merged_tsv": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,4e157c9ddf7bbb9e0f8f8faff2fa6a17",
+                    "versions.yml:md5,4e157c9ddf7bbb9e0f8f8faff2fa6a17",
+                    "versions.yml:md5,88e7680fe2a8da33e35a81a07afff2c5",
+                    "versions.yml:md5,bb024cab3c497b202e7843d975eca0cf",
+                    "versions.yml:md5,bb024cab3c497b202e7843d975eca0cf"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:29:04.201964325"
     },
     " ['sarscov2']['illumina']['test_fastq_gz'] - stub": {
         "content": [
@@ -67,6 +102,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
         "timestamp": "2024-01-24T09:54:46.793242828"
     }
 }

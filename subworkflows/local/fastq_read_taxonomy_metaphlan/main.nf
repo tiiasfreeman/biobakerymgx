@@ -13,6 +13,7 @@ workflow FASTQ_READ_TAXONOMY_METAPHLAN {
     preprocessed_reads_fastq_gz // channel: [ val(meta), [ reads_1.fastq.gz, reads_2.fastq.gz ] ] (MANDATORY)
     metaphlan_sgb2gtbd_file     // channel: [ metaphlan_sgb2gtbd_file.tsv ] (MANDATORY)
     metaphlan_db                // channel: [ metaphlan_db ] (OPTIONAL)
+    metaphlan_db_version        // value: mpa_vJan21_TOY_CHOCOPhlAnSGB_202103 (OPTIONAL)
 
     main:
 
@@ -25,7 +26,7 @@ workflow FASTQ_READ_TAXONOMY_METAPHLAN {
         //
         // MODULE: Download KneadData database
         //
-        ch_metaphlan_db = METAPHLAN_MAKEDB ().db
+        ch_metaphlan_db = METAPHLAN_MAKEDB ( metaphlan_db_version ).db
         ch_versions = ch_versions.mix(METAPHLAN_MAKEDB.out.versions)
     }
 

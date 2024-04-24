@@ -13,14 +13,16 @@ nextflow_process {
     setup {
         run("METAPHLAN_MAKEDB") {
             script "../../makedb/main.nf"
-            params {
-                metaphlan_db_version = "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103"
+            process {
+                """
+                input[0] = "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103"
+                """
             }
         }
     }
 
 
-    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] ") {
+    test("fastq.gz + metaphlan_db") {
 
         when {
             process {
@@ -29,8 +31,8 @@ nextflow_process {
                     [
                         [ id: 'test' ],
                         [
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists: true)
+                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz", checkIfExists: true),
+                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz", checkIfExists: true)
                         ]
                     ]
                 )
@@ -52,7 +54,7 @@ nextflow_process {
         }
     }
 
-    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['bacteroides_fragilis']['illumina']['test_1_fastq_gz'] -stub ") {
+    test("fastq.gz + metaphlan_db -stub ") {
 
         options "-stub"
 
@@ -63,8 +65,8 @@ nextflow_process {
                     [
                         [ id: 'test' ],
                         [
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_1_fastq_gz'], checkIfExists: true),
-                            file(params.test_data['bacteroides_fragilis']['illumina']['test1_2_fastq_gz'], checkIfExists: true)
+                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz", checkIfExists: true),
+                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz", checkIfExists: true)
                         ]
                     ]
                 )

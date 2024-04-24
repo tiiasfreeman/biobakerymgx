@@ -1,5 +1,5 @@
 {
-    "homo_sapiens - illumina - paired_end_fastq_gz": {
+    "fastq.gz": {
         "content": [
             [
                 [
@@ -16,9 +16,13 @@
                 "versions.yml:md5,0dfc969a58fd168cbcd4a9ee87f0c28d"
             ]
         ],
-        "timestamp": "2024-01-24T15:29:15.427615714"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T11:11:09.743832394"
     },
-    "homo_sapiens - illumina - paired_end_fastq_gz - stub": {
+    "fastq.gz - stub": {
         "content": [
             {
                 "0": [
@@ -67,6 +71,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-19T12:12:00.805222439"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T11:11:19.559542979"
     }
 }

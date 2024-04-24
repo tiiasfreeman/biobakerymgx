@@ -1,0 +1,46 @@
+{
+    "Parameters: default": {
+        "content": [
+            [
+                [
+                    [
+                        "test1_1.merged.fastq.gz:md5,398c2de2315ee0621bf7e7ae9f4da6c3",
+                        "test1_2.merged.fastq.gz:md5,cc9b09043a3eb49d274c2c137e6c092f"
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        "test1_kneaddata.log:md5,599db60bf0e6c175b6213b8668eae520",
+                        "test1_kneaddata_paired_1.fastq.gz:md5,1ec2131229365e22ed29ebbe6af110e4",
+                        "test1_kneaddata_paired_2.fastq.gz:md5,1be4ea1124566c44cfd46f577f26f180",
+                        "test2_kneaddata.log:md5,237254fffe9a34bd47d42544ce85a42e",
+                        "test2_kneaddata_paired_1.fastq.gz:md5,5676b9ae1d87e3802fa52a0ff31d0c5a",
+                        "test2_kneaddata_paired_2.fastq.gz:md5,37cb67e5022c7df99829945dfa82b22a"
+                    ],
+                    [
+                        "all_samples_kneaddata_read_counts.tsv:md5,6673fd8ca96ff68546187b963e5ed34c"
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        "test1_profile.txt:md5,81a9163b96ae997981da78d32ae8758e",
+                        "test2_profile.txt:md5,ab726ce4b471954d789cf2f67401d8f6"
+                    ],
+                    [
+                        "test1_gtdb_profile.txt:md5,32b4336da6f56f660f767ed3b778f0b4",
+                        "test2_gtdb_profile.txt:md5,2d696bb46715192d78b256616914090c"
+                    ]
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T13:58:41.505643708"
+    }
+}

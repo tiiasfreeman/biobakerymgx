@@ -9,7 +9,7 @@ nextflow_process {
     tag "metaphlan"
     tag "metaphlan/sgbtogtdbprofile"
 
-    test(" metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' & ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ") {
+    test("'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' + metaphlan_sgb2gtdb_profile") {
 
         when {
             process {
@@ -17,10 +17,10 @@ nextflow_process {
                 input[0] = Channel.of(
                     [
                         [ id: 'test' ],
-                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true )
+                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile1.txt", checkifExists: true )
                     ]
                 )
-                input[1] = file( params.test_data['assets']['metaphlan']['metaphlan_sgb2gtdb_tsv'], checkifExists: true )
+                input[1] = file( "$projectDir/assets/test-datasets/metaphlan/mpa_vJan21_TOY_CHOCOPhlAnSGB_20_SGB2GTDB.tsv", checkifExists: true )
                 """
             }
         }
@@ -43,10 +43,10 @@ nextflow_process {
                 input[0] = Channel.of(
                     [
                         [ id: 'test' ],
-                        file( params.test_data['assets']['metaphlan']['metaphlan_sgb_profile1_txt'], checkifExists: true )
+                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile1.txt", checkifExists: true )
                     ]
                 )
-                input[1] = file( params.test_data['assets']['metaphlan']['metaphlan_sgb2gtdb_tsv'], checkifExists: true )
+                input[1] = file( "$projectDir/assets/test-datasets/metaphlan/mpa_vJan21_TOY_CHOCOPhlAnSGB_20_SGB2GTDB.tsv", checkifExists: true )
                 """
             }
         }

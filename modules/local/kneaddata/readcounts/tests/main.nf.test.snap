@@ -1,24 +1,28 @@
 {
-    " ['assets']['kneaddata']['kneaddata_log'] ": {
+    "kneaddata.log": {
         "content": [
             {
                 "0": [
-                    "all_samples_kneaddata_read_counts.tsv:md5,a9372ca3ae084675b1914918138115c7"
+                    "all_samples_kneaddata_read_counts.tsv:md5,0755c4165669f664e231afa434dab476"
                 ],
                 "1": [
                     "versions.yml:md5,d6bd8ea7fac7f2a2574411e28de205e7"
                 ],
                 "kneaddata_read_counts": [
-                    "all_samples_kneaddata_read_counts.tsv:md5,a9372ca3ae084675b1914918138115c7"
+                    "all_samples_kneaddata_read_counts.tsv:md5,0755c4165669f664e231afa434dab476"
                 ],
                 "versions": [
                     "versions.yml:md5,d6bd8ea7fac7f2a2574411e28de205e7"
                 ]
             }
         ],
-        "timestamp": "2024-01-24T15:49:15.314632252"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:01:58.043363893"
     },
-    " ['assets']['kneaddata']['kneaddata_log'] - stub ": {
+    " kneaddata.log - stub ": {
         "content": [
             {
                 "0": [
@@ -35,6 +39,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-24T15:49:23.167052628"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T10:02:04.510811244"
     }
 }

@@ -9,7 +9,7 @@ nextflow_process {
     tag "kneaddata"
     tag "kneaddata/readcounts"
 
-    test(" ['assets']['kneaddata']['kneaddata_log'] ") {
+    test("kneaddata.log") {
 
         when {
             process {
@@ -17,11 +17,11 @@ nextflow_process {
                 input[0] = Channel.of(
                     [
                         [ id: 'test1' ],
-                        file( params.test_data['assets']['kneaddata']['kneaddata1_log'], checkifExists:true )
+                        file( "projectDir/assets/test-datasets/kneaddata/kneaddata1.log", checkifExists:true )
                     ],
                     [
                         [ id: 'test2' ],
-                        file( params.test_data['assets']['kneaddata']['kneaddata2_log'], checkifExists:true )
+                        file( "projectDir/assets/test-datasets/kneaddata/kneaddata2.log", checkifExists:true )
                     ],
                 )
                 .map { [ [ id:'all_samples' ], it[1] ] }
@@ -39,7 +39,7 @@ nextflow_process {
         }
     }
 
-    test(" ['assets']['kneaddata']['kneaddata_log'] - stub ") {
+    test(" kneaddata.log - stub ") {
 
         options "-stub"
 
@@ -49,11 +49,11 @@ nextflow_process {
                 input[0] = Channel.of(
                     [
                         [ id: 'test1' ],
-                        file( params.test_data['assets']['kneaddata']['kneaddata1_log'], checkifExists:true )
+                        file( "projectDir/assets/test-datasets/kneaddata/kneaddata1.log", checkifExists:true )
                     ],
                     [
                         [ id: 'test2' ],
-                        file( params.test_data['assets']['kneaddata']['kneaddata2_log'], checkifExists:true )
+                        file( "projectDir/assets/test-datasets/kneaddata/kneaddata2.log", checkifExists:true )
                     ],
                 )
                 .map { [ [ id:'all_samples' ], it[1] ] }

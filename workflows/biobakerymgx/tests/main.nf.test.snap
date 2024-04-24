@@ -1,5 +1,5 @@
 {
-    " ['bacteroides_fragilis']['illumina']['test_fastq_gz'] - stub ": {
+    "fastq.gz": {
         "content": [
             {
                 "0": [
@@ -8,8 +8,8 @@
                             "id": "test2"
                         },
                         [
-                            "test2_kneaddata_paired_1.fastq.gz:md5,071e7aef3d82d5559f7019a64cd6843f",
-                            "test2_kneaddata_paired_2.fastq.gz:md5,53712e57f0562da5a314177515ac01f0"
+                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
+                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
                         ]
                     ],
                     [
@@ -17,43 +17,28 @@
                             "id": "test"
                         },
                         [
-                            "test_kneaddata_paired_1.fastq.gz:md5,5f73374f13068e4daaa26a1ce73cc1af",
-                            "test_kneaddata_paired_2.fastq.gz:md5,6e2f1123a77c6426fa97b70328edae73"
+                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
+                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
                         ]
                     ]
                 ],
                 "1": [
-                    "all_samples_kneaddata_read_counts.tsv:md5,86c322a123efddea60c8cda32550eb27"
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "all_samples"
-                        },
-                        "all_samples.txt:md5,8e259b652de82d5279b58c2a846ec4c8"
-                    ]
+                    
                 ],
                 "3": [
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4ba9f8a902b9acb7c6e248cf73ee3a9d",
-                    "versions.yml:md5,595699df0017182801b030ce8a44b4e5",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,d6c57b942810378ae3f0e5027bc798da",
-                    "versions.yml:md5,decdaf6f1a1ec3798868928b45e73bbd"
-                ],
-                "ch_preprocessed_read_counts_tsv": [
-                    "all_samples_kneaddata_read_counts.tsv:md5,86c322a123efddea60c8cda32550eb27"
-                ],
-                "cread_taxonomy_tsv": [
                     [
-                        {
-                            "id": "all_samples"
-                        },
-                        "all_samples.txt:md5,8e259b652de82d5279b58c2a846ec4c8"
+                        "multiqc_report.html:md5,667c271a46fac8be87db9c8b51c7eb3f"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,d9f2edf37349457eccb7644ee1db2ae7"
+                ],
+                "multiqc_report": [
+                    [
+                        "multiqc_report.html:md5,667c271a46fac8be87db9c8b51c7eb3f"
                     ]
                 ],
                 "preprocessed_fastq_gz": [
@@ -62,8 +47,8 @@
                             "id": "test2"
                         },
                         [
-                            "test2_kneaddata_paired_1.fastq.gz:md5,071e7aef3d82d5559f7019a64cd6843f",
-                            "test2_kneaddata_paired_2.fastq.gz:md5,53712e57f0562da5a314177515ac01f0"
+                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
+                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
                         ]
                     ],
                     [
@@ -71,22 +56,19 @@
                             "id": "test"
                         },
                         [
-                            "test_kneaddata_paired_1.fastq.gz:md5,5f73374f13068e4daaa26a1ce73cc1af",
-                            "test_kneaddata_paired_2.fastq.gz:md5,6e2f1123a77c6426fa97b70328edae73"
+                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
+                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
                         ]
                     ]
                 ],
+                "preprocessed_read_counts_tsv": [
+                    
+                ],
+                "read_taxonomy_tsv": [
+                    
+                ],
                 "versions": [
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4ba9f8a902b9acb7c6e248cf73ee3a9d",
-                    "versions.yml:md5,595699df0017182801b030ce8a44b4e5",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,d6c57b942810378ae3f0e5027bc798da",
-                    "versions.yml:md5,decdaf6f1a1ec3798868928b45e73bbd"
+                    "versions.yml:md5,d9f2edf37349457eccb7644ee1db2ae7"
                 ]
             }
         ],
@@ -94,103 +76,6 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-02-15T12:43:31.299823001"
-    },
-    " ['bacteroides_fragilis']['illumina']['test_fastq_gz'] ": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test2"
-                        },
-                        [
-                            "test2_kneaddata_paired_1.fastq.gz:md5,071e7aef3d82d5559f7019a64cd6843f",
-                            "test2_kneaddata_paired_2.fastq.gz:md5,53712e57f0562da5a314177515ac01f0"
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "test"
-                        },
-                        [
-                            "test_kneaddata_paired_1.fastq.gz:md5,5f73374f13068e4daaa26a1ce73cc1af",
-                            "test_kneaddata_paired_2.fastq.gz:md5,6e2f1123a77c6426fa97b70328edae73"
-                        ]
-                    ]
-                ],
-                "1": [
-                    "all_samples_kneaddata_read_counts.tsv:md5,86c322a123efddea60c8cda32550eb27"
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "all_samples"
-                        },
-                        "all_samples.txt:md5,8e259b652de82d5279b58c2a846ec4c8"
-                    ]
-                ],
-                "3": [
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4ba9f8a902b9acb7c6e248cf73ee3a9d",
-                    "versions.yml:md5,595699df0017182801b030ce8a44b4e5",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,d6c57b942810378ae3f0e5027bc798da",
-                    "versions.yml:md5,decdaf6f1a1ec3798868928b45e73bbd"
-                ],
-                "ch_preprocessed_read_counts_tsv": [
-                    "all_samples_kneaddata_read_counts.tsv:md5,86c322a123efddea60c8cda32550eb27"
-                ],
-                "cread_taxonomy_tsv": [
-                    [
-                        {
-                            "id": "all_samples"
-                        },
-                        "all_samples.txt:md5,8e259b652de82d5279b58c2a846ec4c8"
-                    ]
-                ],
-                "preprocessed_fastq_gz": [
-                    [
-                        {
-                            "id": "test2"
-                        },
-                        [
-                            "test2_kneaddata_paired_1.fastq.gz:md5,071e7aef3d82d5559f7019a64cd6843f",
-                            "test2_kneaddata_paired_2.fastq.gz:md5,53712e57f0562da5a314177515ac01f0"
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "test"
-                        },
-                        [
-                            "test_kneaddata_paired_1.fastq.gz:md5,5f73374f13068e4daaa26a1ce73cc1af",
-                            "test_kneaddata_paired_2.fastq.gz:md5,6e2f1123a77c6426fa97b70328edae73"
-                        ]
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4b242c78db48e8cca6ceb92c79000a94",
-                    "versions.yml:md5,4ba9f8a902b9acb7c6e248cf73ee3a9d",
-                    "versions.yml:md5,595699df0017182801b030ce8a44b4e5",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,789b2aa7e05b16aa826f583b8dac2b43",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,cb5e83f1143646d81fb20728cff2ec6d",
-                    "versions.yml:md5,d6c57b942810378ae3f0e5027bc798da",
-                    "versions.yml:md5,decdaf6f1a1ec3798868928b45e73bbd"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-02-15T12:30:10.646686544"
+        "timestamp": "2024-04-24T13:17:57.217658994"
     }
 }
