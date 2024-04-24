@@ -23,9 +23,6 @@ nextflow_process {
     test("fastq.gz") {
 
         when {
-            params {
-                max_cpus = 1
-            }
             process {
                 """
                 input[0] = Channel.of(

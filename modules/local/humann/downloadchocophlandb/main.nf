@@ -20,8 +20,6 @@ process HUMANN_DOWNLOADCHOCOPHLANDB {
     script:
     def args = task.ext.args ?: ''
     """
-    https_proxy=http://klone-dip1-A-ib:3128
-    export https_proxy
     humann_databases \\
         --download chocophlan \\
         ${chocophlan_db_version} \\
