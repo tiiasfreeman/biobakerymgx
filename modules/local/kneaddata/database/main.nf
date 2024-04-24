@@ -1,5 +1,5 @@
 process KNEADDATA_DATABASE {
-    tag "${params}.kneaddata_db_type"
+    tag "${kneaddata_db_type}"
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
@@ -7,8 +7,11 @@ process KNEADDATA_DATABASE {
         'https://depot.galaxyproject.org/singularity/kneaddata:0.12.0--pyhdfd78af_1':
         'biocontainers/kneaddata:0.12.0--pyhdfd78af_1' }"
 
+    input:
+    val kneaddata_db_type
+
     output:
-    path "kneaddata_${params.kneaddata_db_type}/"   , emit: kneaddata_db
+    path "kneaddata_${kneaddata_db_type}/"   , emit: kneaddata_db
     path "versions.yml"                             , emit: versions
 
     when:
@@ -17,10 +20,8 @@ process KNEADDATA_DATABASE {
     script:
     def args = task.ext.args ?: ''
     """
-    https_proxy=http://klone-dip1-A-ib:3128
-    export https_proxy
     kneaddata_database \\
-        --download $params.kneaddata_db_type bowtie2 kneaddata_${params.kneaddata_db_type}
+        --download $kneaddata_db_type bowtie2 kneaddata_${kneaddata_db_type}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -31,7 +32,7 @@ process KNEADDATA_DATABASE {
     stub:
     def args = task.ext.args ?: ''
     """
-    mkdir kneaddata_${params.kneaddata_db_type}
+    mkdir kneaddata_${kneaddata_db_type}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

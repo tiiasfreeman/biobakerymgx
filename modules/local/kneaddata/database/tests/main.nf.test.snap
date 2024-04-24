@@ -1,10 +1,10 @@
 {
-    " kneaddata_db_type = 'human_genome' -stub ": {
+    "'human_genome' -stub ": {
         "content": [
             {
                 "0": [
                     [
-
+                        
                     ]
                 ],
                 "1": [
@@ -12,7 +12,7 @@
                 ],
                 "kneaddata_db": [
                     [
-
+                        
                     ]
                 ],
                 "versions": [
@@ -20,9 +20,13 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-15T14:25:25.547036029"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-24T00:00:57.16221756"
     },
-    " kneaddata_db_type = 'human_genome' ": {
+    " 'human_genome' ": {
         "content": [
             {
                 "0": [
@@ -53,6 +57,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-15T14:21:27.341432988"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-04-23T23:59:43.183441529"
     }
 }

@@ -15,9 +15,9 @@ nextflow.enable.dsl = 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { BIOBAKERYMGX  } from './workflows/biobakerymgx'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_biobakerymgx_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_biobakerymgx_pipeline'
+include { BIOBAKERYMGX              } from './workflows/biobakerymgx'
+include { PIPELINE_INITIALISATION   } from './subworkflows/local/utils_nfcore_biobakerymgx_pipeline'
+include { PIPELINE_COMPLETION       } from './subworkflows/local/utils_nfcore_biobakerymgx_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

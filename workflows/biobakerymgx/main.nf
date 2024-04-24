@@ -56,10 +56,10 @@ workflow BIOBAKERYMGX {
     ch_multiqc_files = Channel.empty()
 
     /*-----------------------------------------------------------------------------------
-        Merge read replicates
+        Prepare reads for biobakerymgx
     -----------------------------------------------------------------------------------*/
+    // group reads from the same sample
     if ( !params.skip_runmerging ) {
-
         ch_reads_for_cat_branch = ch_samplesheet
             .map {
                 meta, reads ->
@@ -79,6 +79,9 @@ workflow BIOBAKERYMGX {
                 skip: true
             }
 
+        //
+        // MODULE: Concatenate fastq files within samples
+        //
         ch_reads_runmerged = CAT_FASTQ ( ch_reads_for_cat_branch.cat ).reads
             .mix( ch_reads_for_cat_branch.skip )
             .map {
@@ -86,7 +89,6 @@ workflow BIOBAKERYMGX {
                 [ meta, [ reads ].flatten() ]
             }
         ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
-
     } else {
         ch_reads_runmerged = ch_samplesheet
     }
@@ -104,7 +106,7 @@ workflow BIOBAKERYMGX {
     /*-----------------------------------------------------------------------------------
         Read-preprocessing: KneadData
     -----------------------------------------------------------------------------------*/
-    if ( params.skip_kneaddata ) {
+    if ( params.run_kneaddata ) {
         // create channel from params.kneaddata_db
         if ( !params.kneaddata_db ){
             ch_kneaddata_db = null
@@ -127,7 +129,7 @@ workflow BIOBAKERYMGX {
     /*-----------------------------------------------------------------------------------
         Taxonomic classification: MetaPhlAn
     -----------------------------------------------------------------------------------*/
-    if ( !params.skip_metaphlan ) {
+    if ( params.run_metaphlan ) {
         // create channel from params.kneaddata_db
         if ( !params.metaphlan_db ){
             ch_metaphlan_db = null
@@ -150,6 +152,11 @@ workflow BIOBAKERYMGX {
         ch_read_taxonomy_tsv = Channel.empty()
     }
 
+
+
+    /*-----------------------------------------------------------------------------------
+        Pipeline report utilities
+    -----------------------------------------------------------------------------------*/
     //
     // Collate and save software versions
     //
@@ -171,6 +178,9 @@ workflow BIOBAKERYMGX {
     ch_multiqc_files                      = ch_multiqc_files.mix(ch_collated_versions)
     ch_multiqc_files                      = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: false))
 
+    //
+    // MODULE: Run MULTIQC to create the pipeline report
+    //
     MULTIQC (
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
