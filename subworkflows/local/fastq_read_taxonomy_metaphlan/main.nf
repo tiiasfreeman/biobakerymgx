@@ -43,14 +43,14 @@ workflow FASTQ_READ_TAXONOMY_METAPHLAN {
     ch_versions = ch_versions.mix(METAPHLAN_SGBTOGTDBPROFILE.out.versions)
 
     // combine metaphlan profiles for merging
-    ch_gtdb_profiles_combined_tsv = ch_gtdb_profile_tsv
+    ch_metaphlan_profiles_combined_tsv = ch_metaphlan_profile_txt
     .map { [ [ id:'all_samples' ], it[1] ] }
     .groupTuple( sort: 'deep' )
 
     //
     // MODULE: Merge Metaphlan profiles
     //
-    ch_metaphlan_profiles_merged_tsv = METAPHLAN_MERGEMETAPHLANTABLES ( ch_gtdb_profiles_combined_tsv ).txt
+    ch_metaphlan_profiles_merged_tsv = METAPHLAN_MERGEMETAPHLANTABLES ( ch_metaphlan_profiles_combined_tsv ).txt
     ch_versions = ch_versions.mix(METAPHLAN_MERGEMETAPHLANTABLES.out.versions)
 
     emit:
