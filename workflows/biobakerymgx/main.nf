@@ -59,7 +59,7 @@ workflow BIOBAKERYMGX {
         Prepare reads for biobakerymgx
     -----------------------------------------------------------------------------------*/
     // group reads from the same sample
-    if ( !params.skip_runmerging ) {
+    if ( params.run_runmerging ) {
         ch_reads_for_cat_branch = ch_samplesheet
             .map {
                 meta, reads ->
