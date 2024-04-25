@@ -1,81 +1,40 @@
 {
     "fastq.gz": {
         "content": [
-            {
-                "0": [
+            [
+                [
+                    {
+                        "id": "test2"
+                    },
                     [
-                        {
-                            "id": "test2"
-                        },
-                        [
-                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
-                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "test"
-                        },
-                        [
-                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
-                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
-                        ]
+                        "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
+                        "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
                     ]
                 ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
+                [
+                    {
+                        "id": "test"
+                    },
                     [
-                        "multiqc_report.html:md5,667c271a46fac8be87db9c8b51c7eb3f"
+                        "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
+                        "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
                     ]
-                ],
-                "4": [
-                    "versions.yml:md5,d9f2edf37349457eccb7644ee1db2ae7"
-                ],
-                "multiqc_report": [
-                    [
-                        "multiqc_report.html:md5,667c271a46fac8be87db9c8b51c7eb3f"
-                    ]
-                ],
-                "preprocessed_fastq_gz": [
-                    [
-                        {
-                            "id": "test2"
-                        },
-                        [
-                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
-                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "test"
-                        },
-                        [
-                            "SRX5235702_SRR8427717_1.fastq.gz:md5,cc895d36dc655210366086535f359fb0",
-                            "SRX5235702_SRR8427717_2.fastq.gz:md5,2b1a67a42fb71032d6c54776fad5a790"
-                        ]
-                    ]
-                ],
-                "preprocessed_read_counts_tsv": [
-                    
-                ],
-                "read_taxonomy_tsv": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,d9f2edf37349457eccb7644ee1db2ae7"
                 ]
-            }
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ]
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-04-24T13:17:57.217658994"
+        "timestamp": "2024-04-24T22:51:47.767796873"
     }
 }

@@ -23,6 +23,14 @@ process KNEADDATA_KNEADDATA {
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
     """
+    # install trimmomatic
+    curl \\
+    -o Trimmomatic-0.33.zip \\
+    http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.33.zip
+
+    # unzip trimmomatic executable
+    unzip Trimmomatic-0.33.zip
+
     kneaddata \\
         --input1 ${fastq_gz[0]} \\
         --input2 ${fastq_gz[1]} \\
@@ -30,7 +38,7 @@ process KNEADDATA_KNEADDATA {
         --output-prefix ${prefix}_kneaddata \\
         --reference-db ${kneaddata_db} \\
         --threads ${task.cpus} \\
-        --trimmomatic ${params.kneaddata_trimmomatic_path} \\
+        --trimmomatic ./Trimmomatic-0.33 \\
         $args
 
     gzip *.fastq

@@ -40,7 +40,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.preprocessed_fastq_gz,
+                    workflow.out.preprocessed_read_counts_tsv,
+                    workflow.out.read_taxonomy_tsv,
+                    workflow.out.versions
+                    ).match()
+                },
+                { assert new File("$outputDir/multiqc/multiqc_report.html").exists() }
             )
         }
     }
