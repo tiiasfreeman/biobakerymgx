@@ -34,7 +34,7 @@ process KNEADDATA_KNEADDATA {
     kneaddata \\
         --input1 ${fastq_gz[0]} \\
         --input2 ${fastq_gz[1]} \\
-        --output . \\
+        --output ./ \\
         --output-prefix ${prefix}_kneaddata \\
         --reference-db ${kneaddata_db} \\
         --threads ${task.cpus} \\
