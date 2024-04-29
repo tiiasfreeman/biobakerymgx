@@ -1,0 +1,262 @@
+Changes in module 'nf-core/metaphlan/metaphlan'
+--- modules/nf-core/metaphlan/metaphlan/main.nf
++++ modules/nf-core/metaphlan/metaphlan/main.nf
+@@ -4,12 +4,12 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/metaphlan:4.0.6--pyhca03a8a_0' :
+-        'biocontainers/metaphlan:4.0.6--pyhca03a8a_0' }"
++        'https://depot.galaxyproject.org/singularity/metaphlan:4.1.0--pyhca03a8a_0' :
++        'biocontainers/metaphlan:4.1.0--pyhca03a8a_0' }"
+ 
+     input:
+     tuple val(meta), path(input)
+-    path metaphlan_db_latest
++    path metaphlan_db
+ 
+     output:
+     tuple val(meta), path("*_profile.txt")   ,                emit: profile
+@@ -28,8 +28,8 @@
+     def bowtie2_out = "$input_type" == "--input_type bowtie2out" || "$input_type" == "--input_type sam" ? '' : "--bowtie2out ${prefix}.bowtie2out.txt"
+ 
+     """
+-    BT2_DB=`find -L "${metaphlan_db_latest}" -name "*rev.1.bt2*" -exec dirname {} \\;`
+-    BT2_DB_INDEX=`find -L ${metaphlan_db_latest} -name "*.rev.1.bt2*" | sed 's/\\.rev.1.bt2.*\$//' | sed 's/.*\\///'`
++    BT2_DB=`find -L "${metaphlan_db}" -name "*rev.1.bt2*" -exec dirname {} \\;`
++    BT2_DB_INDEX=`find -L ${metaphlan_db} -name "*.rev.1.bt2*" | sed 's/\\.rev.1.bt2.*\$//' | sed 's/.*\\///'`
+ 
+     metaphlan \\
+         --nproc $task.cpus \\
+@@ -47,4 +47,22 @@
+         metaphlan: \$(metaphlan --version 2>&1 | awk '{print \$3}')
+     END_VERSIONS
+     """
++
++    stub:
++    def args = task.ext.args ?: ''
++    def prefix = task.ext.prefix ?: "${meta.id}"
++    def input_type = "$input" =~ /.*\.(fastq|fq)/ ? "--input_type fastq" : "$input" =~ /.*\.(fasta|fna|fa)/ ? "--input_type fasta" : "$input".endsWith(".bowtie2out.txt") ? "--input_type bowtie2out" : "--input_type sam"
++    def input_data  = ("$input_type".contains("fastq")) && !meta.single_end ? "${input[0]},${input[1]}" : "$input"
++    def bowtie2_out = "$input_type" == "--input_type bowtie2out" || "$input_type" == "--input_type sam" ? '' : "--bowtie2out ${prefix}.bowtie2out.txt"
++
++    """
++    touch ${prefix}_profile.txt
++    touch ${prefix}.biom
++    touch ${prefix}.bowtie2out.txt
++
++    cat <<-END_VERSIONS > versions.yml
++    "${task.process}":
++        metaphlan: \$(metaphlan --version 2>&1 | awk '{print \$3}')
++    END_VERSIONS
++    """
+ }
+
+--- /dev/null
++++ modules/nf-core/metaphlan/metaphlan/nextflow.config
+@@ -0,0 +1,10 @@
++process {
++    withName: METAPHLAN_METAPHLAN {
++        publishDir = [
++            path: { "${params.outdir}/ReadTaxonomy/metaphlan/metaphlan" },
++            mode: params.publish_dir_mode,
++            pattern: '*_profile.txt'
++        ]
++        ext.args = params.metaphlan_options ? params.metaphlan_options : ""
++    }
++}
+
+--- /dev/null
++++ modules/nf-core/metaphlan/metaphlan/tests/main.nf.test
+@@ -0,0 +1,85 @@
++nextflow_process {
++
++    name "Test Process: METAPHLAN_METAPHLAN"
++    script "../main.nf"
++    process "METAPHLAN_METAPHLAN"
++
++    tag "modules"
++    tag "modules_local"
++    tag "metaphlan"
++    tag "metaphlan/makedb"
++    tag "metaphlan/metaphlan"
++
++    setup {
++        run("METAPHLAN_MAKEDB") {
++            script "../../makedb/main.nf"
++            process {
++                """
++                input[0] = "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103"
++                """
++            }
++        }
++    }
++
++
++    test("fastq.gz + metaphlan_db") {
++
++        when {
++            process {
++                """
++                input[0] = Channel.of(
++                    [
++                        [ id: 'test' ],
++                        [
++                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz", checkIfExists: true),
++                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz", checkIfExists: true)
++                        ]
++                    ]
++                )
++                input[1] = METAPHLAN_MAKEDB.out.db
++                """
++            }
++        }
++
++        then {
++            assertAll (
++                { assert process.success },
++                { assert snapshot(
++                    process.out.profile,
++                    process.out.bt2out,
++                    process.out.versions
++                ).match() },
++                { assert process.out.biom != null }
++            )
++        }
++    }
++
++    test("fastq.gz + metaphlan_db -stub ") {
++
++        options "-stub"
++
++        when {
++            process {
++                """
++                input[0] = Channel.of(
++                    [
++                        [ id: 'test' ],
++                        [
++                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz", checkIfExists: true),
++                            file(params.modules_testdata_base_path + "genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz", checkIfExists: true)
++                        ]
++                    ]
++                )
++                input[1] = METAPHLAN_MAKEDB.out.db
++                """
++            }
++        }
++
++        then {
++            assertAll (
++                { assert process.success },
++                { assert snapshot(process.out).match() }
++            )
++        }
++    }
++}
+
+--- /dev/null
++++ modules/nf-core/metaphlan/metaphlan/tests/main.nf.test.snap
+@@ -0,0 +1,95 @@
++{
++    "fastq.gz + metaphlan_db -stub ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        {
++                            "id": "test"
++                        },
++                        "test_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    [
++                        {
++                            "id": "test"
++                        },
++                        "test.biom:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "2": [
++                    [
++                        {
++                            "id": "test"
++                        },
++                        "test.bowtie2out.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "3": [
++                    "versions.yml:md5,2a9ed777cd0065f872877f20553df297"
++                ],
++                "biom": [
++                    [
++                        {
++                            "id": "test"
++                        },
++                        "test.biom:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "bt2out": [
++                    [
++                        {
++                            "id": "test"
++                        },
++                        "test.bowtie2out.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "profile": [
++                    [
++                        {
++                            "id": "test"
++                        },
++                        "test_profile.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,2a9ed777cd0065f872877f20553df297"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-04-24T14:49:25.110256152"
++    },
++    "fastq.gz + metaphlan_db": {
++        "content": [
++            [
++                [
++                    {
++                        "id": "test"
++                    },
++                    "test_profile.txt:md5,33142bd652b3a5c4a7762f91515a802a"
++                ]
++            ],
++            [
++                [
++                    {
++                        "id": "test"
++                    },
++                    "test.bowtie2out.txt:md5,9bf563c43769e8300be64a8bf1a03c71"
++                ]
++            ],
++            [
++                "versions.yml:md5,2a9ed777cd0065f872877f20553df297"
++            ]
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-04-24T14:48:47.602042185"
++    }
++}
+--- /dev/null
++++ modules/nf-core/metaphlan/metaphlan/tests/tags.yml
+@@ -0,0 +1,2 @@
++metaphlan/metaphlan:
++  - modules/local/metaphlan/metaphlan/**
+
+************************************************************
