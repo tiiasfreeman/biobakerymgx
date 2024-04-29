@@ -5,8 +5,6 @@ on:
   release:
     types: [published]
   merge_group:
-    types:
-      - checks_requested
     branches:
       - master
 
