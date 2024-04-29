@@ -43,6 +43,104 @@
                 }
             }
         },
+        "read_preprocessing_options": {
+            "title": "Read preprocessing options",
+            "type": "object",
+            "description": "Parameters for raw read trimming and host contamination removal",
+            "default": "",
+            "properties": {
+                "run_runmerging": {
+                    "type": "boolean",
+                    "description": "Merge replicate read sets within samples"
+                },
+                "run_kneaddata": {
+                    "type": "boolean",
+                    "description": "Run KneadData to preprocess raw reads?"
+                },
+                "kneaddata_db": {
+                    "type": "string",
+                    "description": "Path to bowtie2 database for KneadData (will download if False)"
+                },
+                "kneaddata_db_version": {
+                    "type": "string",
+                    "default": "human_genome",
+                    "description": "Version of KneadData's database to download"
+                },
+                "kneaddata_save_db": {
+                    "type": "boolean",
+                    "description": "Save KneadData's database after downloading?"
+                },
+                "kneaddata_trimmomatic_path": {
+                    "type": "string",
+                    "default": "/usr/local/share/trimmomatic-0.39-2",
+                    "description": "Path to trimmomatic when running KneadData"
+                },
+                "kneaddata_options": {
+                    "type": "string",
+                    "description": "Additional KneadData argument"
+                }
+            }
+        },
+        "read_based_taxonomy_options": {
+            "title": "Read-based taxonomy options",
+            "type": "object",
+            "description": "Parameters for taxonomically classifying reads with MetaPhlAn",
+            "default": "",
+            "properties": {
+                "run_metaphlan": {
+                    "type": "boolean",
+                    "description": "Run MetaPhlAn to taxonomically classify reads?"
+                },
+                "metaphlan_db": {
+                    "type": "string",
+                    "description": "Path to pre-downloaded MetaPhlAn database"
+                },
+                "metaphlan_db_version": {
+                    "type": "string",
+                    "description": "Version of MetaPhlAn's database to download"
+                },
+                "metaphlan_save_db": {
+                    "type": "boolean",
+                    "description": "Save MetaPhlAn's database if it was downloaded?"
+                },
+                "metaphlan_options": {
+                    "type": "string",
+                    "description": "Additiona MetaPhlAn options"
+                },
+                "metaphlan_sgb2gtbd_file": {
+                    "type": "string",
+                    "default": "https://github.com/biobakery/MetaPhlAn/raw/master/metaphlan/utils/mpa_vOct22_CHOCOPhlAnSGB_202212_SGB2GTDB.tsv",
+                    "description": "Path to MetaPhlAn's SGB2GTDB profile to convert to standard taxonomy"
+                }
+            }
+        },
+        "read_based_functional_profiling": {
+            "title": "Read-based functional profiling",
+            "type": "object",
+            "description": "Parameters for assessing functional capacity with HUMAnN",
+            "default": "",
+            "properties": {
+                "run_humann": {
+                    "type": "boolean",
+                    "description": "Run HUMAnN to assess functional capacity of a metagenome?"
+                },
+                "chocophlan_db_version": {
+                    "type": "string",
+                    "default": "DEMO",
+                    "description": "ChocoPhlAn database version to download"
+                },
+                "uniref_db_version": {
+                    "type": "string",
+                    "default": "DEMO_diamond",
+                    "description": "UNIREF database version to download"
+                },
+                "utility_mapping_version": {
+                    "type": "string",
+                    "default": "DEMO",
+                    "description": "Utility mapping version to download"
+                }
+            }
+        },
         "institutional_config_options": {
             "title": "Institutional config options",
             "type": "object",
@@ -241,6 +339,15 @@
     "allOf": [
         {
             "$ref": "#/definitions/input_output_options"
+        },
+        {
+            "$ref": "#/definitions/read_preprocessing_options"
+        },
+        {
+            "$ref": "#/definitions/read_based_taxonomy_options"
+        },
+        {
+            "$ref": "#/definitions/read_based_functional_profiling"
         },
         {
             "$ref": "#/definitions/institutional_config_options"

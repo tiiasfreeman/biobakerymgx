@@ -1,0 +1,264 @@
+Changes in module 'nf-core/metaphlan/mergemetaphlantables'
+--- modules/nf-core/metaphlan/mergemetaphlantables/main.nf
++++ modules/nf-core/metaphlan/mergemetaphlantables/main.nf
+@@ -3,8 +3,8 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/metaphlan:4.0.6--pyhca03a8a_0' :
+-        'biocontainers/metaphlan:4.0.6--pyhca03a8a_0' }"
++        'https://depot.galaxyproject.org/singularity/metaphlan:4.1.0--pyhca03a8a_0' :
++        'biocontainers/metaphlan:4.1.0--pyhca03a8a_0' }"
+ 
+     input:
+     tuple val(meta), path(profiles)
+@@ -30,4 +30,16 @@
+         metaphlan: \$(metaphlan --version 2>&1 | awk '{print \$3}')
+     END_VERSIONS
+     """
++
++    stub:
++    def args = task.ext.args ?: ''
++    prefix = task.ext.prefix ?: "${meta.id}"
++    """
++    touch ${prefix}.txt
++
++    cat <<-END_VERSIONS > versions.yml
++    "${task.process}":
++        metaphlan: \$(metaphlan --version 2>&1 | awk '{print \$3}')
++    END_VERSIONS
++    """
+ }
+
+--- /dev/null
++++ modules/nf-core/metaphlan/mergemetaphlantables/nextflow.config
+@@ -0,0 +1,9 @@
++process {
++    withName: METAPHLAN_MERGEMETAPHLANTABLES {
++        publishDir = [
++            path: { "${params.outdir}/ReadTaxonomy/metaphlan/mergemetaphlantables" },
++            mode: params.publish_dir_mode,
++            pattern: '*.txt'
++        ]
++    }
++}
+--- /dev/null
++++ modules/nf-core/metaphlan/mergemetaphlantables/tests/main.nf.test
+@@ -0,0 +1,72 @@
++nextflow_process {
++
++    name "Test Process: METAPHLAN_MERGEMETAPHLANTABLES"
++    script "../main.nf"
++    process "METAPHLAN_MERGEMETAPHLANTABLES"
++
++    tag "modules"
++    tag "modules_local"
++    tag "metaphlan"
++    tag "metaphlan/mergemetaphlantables"
++
++
++    test(" metaphlan_sgb_profile ") {
++
++        when {
++            process {
++                """
++                input[0] = Channel.of(
++                    [
++                        [ id: 'test' ],
++                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile1.txt", checkifExists: true)
++                    ],
++                    [
++                        [ id: 'test2' ],
++                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile2.txt", checkifExists: true)
++                    ]
++                )
++                .map { [ [ id:'all_samples' ], it[1] ] }
++                .groupTuple( sort: 'deep' )
++                """
++            }
++        }
++
++        then {
++            assertAll (
++                { assert process.success },
++                { assert snapshot(process.out).match() }
++            )
++        }
++    }
++
++    test(" metaphlan_sgb_profile -stub ") {
++
++        options "-stub"
++
++        when {
++            process {
++                """
++                input[0] = Channel.of(
++                    [
++                        [ id: 'test' ],
++                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile1.txt", checkifExists: true)
++                    ],
++                    [
++                        [ id: 'test2' ],
++                        file( "$projectDir/assets/test-datasets/metaphlan/metaphlan_sgb_profile2.txt", checkifExists: true)
++                    ]
++                )
++                .map { [ [ id:'all_samples' ], it[1] ] }
++                .groupTuple( sort: 'deep' )
++                """
++            }
++        }
++
++        then {
++            assertAll (
++                { assert process.success },
++                { assert snapshot(process.out).match() }
++            )
++        }
++    }
++}
+
+--- /dev/null
++++ modules/nf-core/metaphlan/mergemetaphlantables/tests/main.nf.test.snap
+@@ -0,0 +1,134 @@
++{
++    " metaphlan_sgb_profile -stub ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,40d6568d6a3dd3eed228bbc7ddbb8a9a"
++                ],
++                "txt": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,40d6568d6a3dd3eed228bbc7ddbb8a9a"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-04-24T10:02:52.20700281"
++    },
++    " ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,f4627b6001fe6dbde372f0a648f574c2"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
++                ],
++                "txt": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,f4627b6001fe6dbde372f0a648f574c2"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-01-26T08:14:43.460606117"
++    },
++    " metaphlan_sgb_profile ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,f4627b6001fe6dbde372f0a648f574c2"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,40d6568d6a3dd3eed228bbc7ddbb8a9a"
++                ],
++                "txt": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,f4627b6001fe6dbde372f0a648f574c2"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,40d6568d6a3dd3eed228bbc7ddbb8a9a"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-04-24T10:02:41.196855948"
++    },
++    " ['assets']['metaphlan']['metaphlan_sgb_profile1_txt'] -stub ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
++                ],
++                "txt": [
++                    [
++                        {
++                            "id": "all_samples"
++                        },
++                        "all_samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,36d4842de5dd44b8b642cbfbbc6b4aff"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-01-26T08:14:56.286600733"
++    }
++}
+--- /dev/null
++++ modules/nf-core/metaphlan/mergemetaphlantables/tests/tags.yml
+@@ -0,0 +1,2 @@
++metaphlan/mergemetaphlantables:
++  - modules/local/metaphlan/mergemetaphlantables/**
+
+************************************************************

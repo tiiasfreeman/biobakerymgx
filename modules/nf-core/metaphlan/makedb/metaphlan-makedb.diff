@@ -1,0 +1,333 @@
+Changes in module 'nf-core/metaphlan/makedb'
+--- modules/nf-core/metaphlan/makedb/main.nf
++++ modules/nf-core/metaphlan/makedb/main.nf
+@@ -1,26 +1,31 @@
+ process METAPHLAN_MAKEDB {
++    tag "${metaphlan_db_version}"
+     label 'process_medium'
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/metaphlan:4.0.6--pyhca03a8a_0' :
+-        'biocontainers/metaphlan:4.0.6--pyhca03a8a_0' }"
++        'https://depot.galaxyproject.org/singularity/metaphlan:4.1.0--pyhca03a8a_0' :
++        'biocontainers/metaphlan:4.1.0--pyhca03a8a_0' }"
++
++    input:
++    val metaphlan_db_version
+ 
+     output:
+-    path "metaphlan_db_latest"      , emit: db
+-    path "versions.yml"         , emit: versions
++    path "${metaphlan_db_version}"  , emit: db
++    path "versions.yml"             , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+ 
+     script:
+     def args = task.ext.args ?: ''
+-
+     """
++    https_proxy=http://klone-dip1-A-ib:3128
++    export https_proxy
+     metaphlan \\
+         --install \\
+-        --nproc $task.cpus \\
+-        --bowtie2db metaphlan_db_latest \\
++        --index ${metaphlan_db_version} \\
++        --bowtie2db ${metaphlan_db_version} \\
+         $args
+ 
+     cat <<-END_VERSIONS > versions.yml
+@@ -30,18 +35,17 @@
+     """
+     stub:
+     """
+-    mkdir metaphlan_db_latest
+-    touch metaphlan_db_latest/mpa_latest
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.1.bt2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.2.bt2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.3.bt2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.4.bt2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.fna.bz2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.md5
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.pkl
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.rev.1.bt2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.rev.2.bt2
+-    touch metaphlan_db_latest/mpa_v31_CHOCOPhlAn_201901.tar
++    mkdir ${metaphlan_db_version}
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.1.bt2l
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.2.bt2l
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.3.bt2l
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.4.bt2l
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.fna.bz2
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.pkl
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.rev.1.bt2l
++    touch ${metaphlan_db_version}/${metaphlan_db_version}.rev.2.bt2l
++    touch ${metaphlan_db_version}/${metaphlan_db_version}_VINFO.csv
++    touch ${metaphlan_db_version}/${metaphlan_db_version}_VSG.fna
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+
+--- /dev/null
++++ modules/nf-core/metaphlan/makedb/nextflow.config
+@@ -0,0 +1,10 @@
++process {
++    withName: METAPHLAN_MAKEDB {
++        publishDir = [
++            enabled: params.metaphlan_save_db,
++            path: { "${params.outdir}/ReadTaxonomy/metaphlan/makedb" },
++            mode: params.publish_dir_mode,
++            pattern: '*/'
++        ]
++    }
++}
+
+--- /dev/null
++++ modules/nf-core/metaphlan/makedb/tests/main.nf.test
+@@ -0,0 +1,50 @@
++nextflow_process {
++
++    name "Test Process: METAPHLAN_MAKEDB"
++    script "../main.nf"
++    process "METAPHLAN_MAKEDB"
++
++    tag "modules"
++    tag "modules_local"
++    tag "metaphlan"
++    tag "metaphlan/makedb"
++
++
++    test("'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'") {
++
++        when {
++            process {
++                """
++                input[0] = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
++                """
++            }
++        }
++
++        then {
++            assertAll (
++                { assert process.success },
++                { assert snapshot(process.out).match() }
++            )
++        }
++    }
++
++    test("'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' -stub ") {
++
++        options "-stub"
++
++        when {
++            process {
++                """
++                input[0] = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'
++                """
++            }
++        }
++
++        then {
++            assertAll (
++                { assert process.success },
++                { assert snapshot(process.out).match() }
++            )
++        }
++    }
++}
+
+--- /dev/null
++++ modules/nf-core/metaphlan/makedb/tests/main.nf.test.snap
+@@ -0,0 +1,182 @@
++{
++    "'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' -stub ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,980dacf75dc62bb712c40ef951f16500"
++                ],
++                "db": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,980dacf75dc62bb712c40ef951f16500"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-04-24T10:14:02.055529409"
++    },
++    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,f560f1878d407cad746b40e19c137b2f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,ada1fa4dbfa0bbd00fd9541458d0caab",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,1b5ec794c2f0c456ea60deb5898f4840",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,fe7bbac658aece93db332255910e3f4f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,43dd63a3263c01105af26b701a9b5562",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,005453b7c66c85f3e01218653d09e266",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,7b23ad55748937a1b21f8ed735fe0d73",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,acc38a28f2e590d5ce12a9defe4c8c87",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,51519311626c56287ac98fc54452f503"
++                ],
++                "db": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,f560f1878d407cad746b40e19c137b2f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,ada1fa4dbfa0bbd00fd9541458d0caab",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,1b5ec794c2f0c456ea60deb5898f4840",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,fe7bbac658aece93db332255910e3f4f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,43dd63a3263c01105af26b701a9b5562",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,005453b7c66c85f3e01218653d09e266",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,7b23ad55748937a1b21f8ed735fe0d73",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,acc38a28f2e590d5ce12a9defe4c8c87",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,51519311626c56287ac98fc54452f503"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-01-23T13:44:29.208314843"
++    },
++    "'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103'": {
++        "content": [
++            {
++                "0": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,f560f1878d407cad746b40e19c137b2f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,ada1fa4dbfa0bbd00fd9541458d0caab",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,1b5ec794c2f0c456ea60deb5898f4840",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,fe7bbac658aece93db332255910e3f4f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,43dd63a3263c01105af26b701a9b5562",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,005453b7c66c85f3e01218653d09e266",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,7b23ad55748937a1b21f8ed735fe0d73",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,acc38a28f2e590d5ce12a9defe4c8c87",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,980dacf75dc62bb712c40ef951f16500"
++                ],
++                "db": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,f560f1878d407cad746b40e19c137b2f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,ada1fa4dbfa0bbd00fd9541458d0caab",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,1b5ec794c2f0c456ea60deb5898f4840",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,fe7bbac658aece93db332255910e3f4f",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,43dd63a3263c01105af26b701a9b5562",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,005453b7c66c85f3e01218653d09e266",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,7b23ad55748937a1b21f8ed735fe0d73",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,acc38a28f2e590d5ce12a9defe4c8c87",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,980dacf75dc62bb712c40ef951f16500"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-04-24T10:13:48.493592433"
++    },
++    " metaphlan_db_version = 'mpa_vJan21_TOY_CHOCOPhlAnSGB_202103' -stub ": {
++        "content": [
++            {
++                "0": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "1": [
++                    "versions.yml:md5,51519311626c56287ac98fc54452f503"
++                ],
++                "db": [
++                    [
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.3.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.4.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.fna.bz2:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.pkl:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.1.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103.rev.2.bt2l:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VINFO.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
++                        "mpa_vJan21_TOY_CHOCOPhlAnSGB_202103_VSG.fna:md5,d41d8cd98f00b204e9800998ecf8427e"
++                    ]
++                ],
++                "versions": [
++                    "versions.yml:md5,51519311626c56287ac98fc54452f503"
++                ]
++            }
++        ],
++        "meta": {
++            "nf-test": "0.8.4",
++            "nextflow": "23.10.1"
++        },
++        "timestamp": "2024-01-23T13:44:42.591897954"
++    }
++}
+--- /dev/null
++++ modules/nf-core/metaphlan/makedb/tests/tags.yml
+@@ -0,0 +1,2 @@
++metaphlan/makedb:
++  - modules/local/metaphlan/makedb/**
+
+************************************************************
