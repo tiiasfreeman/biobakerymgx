@@ -20,6 +20,8 @@ process KNEADDATA_DATABASE {
     script:
     def args = task.ext.args ?: ''
     """
+    https_proxy=http://klone-dip1-A-ib:3128
+    export https_proxy
     kneaddata_database \\
         --download $kneaddata_db_type bowtie2 kneaddata_${kneaddata_db_type}
 
